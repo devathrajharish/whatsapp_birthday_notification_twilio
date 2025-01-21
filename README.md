@@ -34,7 +34,7 @@ This Python-based project automates birthday reminders and messages using GitHub
      - `TWILIO_AUTH_TOKEN`: Your Twilio Auth Token.  
      - `BIRTHDAYS_DICT`: A JSON string containing the birthdays dictionary, e.g.,  
        ```json
-       {"Mom": "01-20", "Dad": "02-15", "sister": "03-10"}
+       {"Mom": "01-20", "Dad": "02-15", "Sister": "03-10"}
        ```  
 
 3. **GitHub Actions Workflow**:  
@@ -123,7 +123,7 @@ Store the birthdays in JSON format:
 {
   "Mom": "01-20",
   "Dad": "02-15",
-  "sister": "03-10"
+  "Sister": "03-10"
 }  
 ```  
 
