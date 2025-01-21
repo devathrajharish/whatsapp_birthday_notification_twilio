@@ -6,8 +6,8 @@ import json
 # Twilio Credentials (Replace with your actual credentials)
 account_sid = os.getenv("TWILIO_ACCOUNT_SID") # Get this from Twilio Dashboard
 auth_token = os.getenv("TWILIO_AUTH_TOKEN")   # Get this from Twilio Dashboard
-harish = os.getenv("HARISH_NUMBER")   # your whatsapp number
-sachin = os.getenv("SACHIN_NUMBER")   # Your whatsapp Number
+user1 = os.getenv("HARISH_NUMBER")   # your whatsapp number
+user2 = os.getenv("SACHIN_NUMBER")   # Your whatsapp Number
 client = Client(account_sid, auth_token)
 twilio_whatsapp = os.getenv("TWILIO_PHONE_NUMBER")   # Twilio Sandbox Number
 # Birthday List
@@ -34,12 +34,12 @@ for name, bday in birthdays.items():
         message = client.messages.create(
             body=f"🎉 Reminder: It's {name}'s birthday today! Don't forget to wish them! 🎂",
             from_=twilio_whatsapp,
-            to=sachin
+            to=user2
         )
         message = client.messages.create(
         body=f"🎉 Reminder: It's {name}'s birthday today! Don't forget to wish them! 🎂",
         from_=twilio_whatsapp,
-        to=harish
+        to=user1
         )
         print(f"Reminder sent for {name}'s birthday!")
     elif tomorrow_str == bday:
@@ -47,11 +47,11 @@ for name, bday in birthdays.items():
         message = client.messages.create(
             body=f"⏰ Reminder: {name}'s birthday is tomorrow! 🎉 Don't forget to prepare your wishes or a surprise! 🎁",
             from_=twilio_whatsapp,
-            to=harish)
+            to=user1)
         message = client.messages.create(
             body=f"⏰ Reminder: {name}'s birthday is tomorrow! 🎉 Don't forget to prepare your wishes or a surprise! 🎁",
             from_=twilio_whatsapp,
-            to=sachin)
+            to=user2)
     else:
         print(f"No birthday or anniversary today or tomorrow!")
 
@@ -60,12 +60,12 @@ for name, anni_date in anniversaries.items():
         message = client.messages.create(
             body=f"🎉 Reminder: It's {name}'s anniversary today! Don't forget to wish them! 🎂",
             from_=twilio_whatsapp,
-            to=harish
+            to=user1
         )
         message = client.messages.create(
             body=f"🎉 Reminder: It's {name}'s anniversary today! Don't forget to wish them! 🎂",
             from_=twilio_whatsapp,
-            to=sachin
+            to=user2
         )
         print(f"Reminder sent for {name}'s Anniversary!")
 
@@ -74,13 +74,13 @@ for name, anni_date in anniversaries.items():
         message = client.messages.create(
             body=f"⏰ Reminder: {name}'s Anniversary is tomorrow! 🎉 Don't forget to prepare your wishes or a surprise! 🎁",
             from_=twilio_whatsapp,
-            to=harish
+            to=user1
         )
         print(f"Reminder message sent for {name}'s Anniversary!")
         message = client.messages.create(
             body=f"⏰ Reminder: {name}'s Anniversary is tomorrow! 🎉 Don't forget to prepare your wishes or a surprise! 🎁",
             from_=twilio_whatsapp,
-            to=sachin
+            to=user2
         )
         print(f"Reminder message sent for {name}'s Anniversary!")
     else:
