@@ -1,0 +1,33 @@
+name: Run Birthday Reminder
+
+on:
+  schedule:
+    - cron: '30 3 * * *'  # Runs daily at 9:00 AM IST
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install twilio
+      
+      - name: Run Script
+        env: 
+          TWILIO_ACCOUNT_SID: ${{ secrets.ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
+          HARISH_NUMBER: ${{ secrets.HARISH_NUMBER }}
+          SACHIN_NUMBER: ${{ secrets.SACHIN_NUMBER }}
+          BIRTHDAYS: ${{ secrets.BIRTHDAYS }}
+          ANNIVERASARIES: ${{ secrets.ANNIVERASARIES }}
+        run: |
+          python birthdays.py
