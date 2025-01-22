@@ -130,7 +130,7 @@ Store the birthdays in JSON format:
 ---
 
 ## **How to Customize**  
-- **Change Message Content**: Edit the `script.py` file to modify the birthday and reminder messages.  
+- **Change Message Content**: Edit the `send_remainders.py` file to modify the birthday and reminder messages.  
 - **Adjust Schedule**: Update the `cron` expression in the workflow file to change when the script runs.  
 
 ---
