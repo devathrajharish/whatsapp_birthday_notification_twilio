@@ -62,7 +62,7 @@ pip install twilio
   ```env  
   TWILIO_ACCOUNT_SID=your_account_sid  
   TWILIO_AUTH_TOKEN=your_auth_token  
-  BIRTHDAYS_DICT={"Mom": "01-20", "Dad": "02-15", "Krishna": "03-10"}  
+  BIRTHDAYS_DICT={"Mom": "01-20", "Dad": "02-15", "Sister": "03-10"}  
   ```  
 - Use `python-dotenv` to load these variables:
   ```bash
