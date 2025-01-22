@@ -30,4 +30,4 @@ jobs:
           BIRTHDAYS: ${{ secrets.BIRTHDAYS }}
           ANNIVERASARIES: ${{ secrets.ANNIVERASARIES }}
         run: |
-          python birthdays.py
+          python send_remainders.py
