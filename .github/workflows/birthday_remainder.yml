@@ -28,6 +28,6 @@ jobs:
           HARISH_NUMBER: ${{ secrets.HARISH_NUMBER }}
           SACHIN_NUMBER: ${{ secrets.SACHIN_NUMBER }}
           BIRTHDAYS: ${{ secrets.BIRTHDAYS }}
-          ANNIVERASARIES: ${{ secrets.ANNIVERASARIES }}
+          ANNIVERSARIES: ${{ secrets.ANNIVERSARIES }}
         run: |
           python send_remainders.py

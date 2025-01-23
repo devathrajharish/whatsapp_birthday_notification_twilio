@@ -13,7 +13,7 @@ twilio_whatsapp = os.getenv("TWILIO_PHONE_NUMBER")   # Twilio Sandbox Number
 # Birthday List
 
 birthdays_json = os.getenv("BIRTHDAYS")
-anniversaries_json = os.getenv("ANNIVERASARIES")
+anniversaries_json = os.getenv("ANNIVERSARIES")
 anniversaries = json.loads(anniversaries_json)
 birthdays = json.loads(birthdays_json)
 #print(birthdays)
