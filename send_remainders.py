@@ -28,13 +28,14 @@ today = datetime.now()
 today_str = today.strftime("%m-%d")
 tomorrow_str = (today + timedelta(days=1)).strftime("%m-%d")
 
-print(today_str)
-print(tomorrow_str)
+print("today_str",today_str)
+print("tomorrow_str",tomorrow_str)
 
 # # Check for birthdays and send reminder
 for name, bday in birthdays.items():
     # reminder = datetime.strptime(bday, "%m-%d")
     if today_str == bday:
+        print('bday:',bday)
         message = client.messages.create(
             body=f"🎉 Reminder: It's {name}'s birthday today! Don't forget to wish them! 🎂",
             from_=twilio_whatsapp,
