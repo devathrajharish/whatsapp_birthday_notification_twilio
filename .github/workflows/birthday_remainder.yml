@@ -3,6 +3,8 @@ name: Run Birthday Reminder
 on:
   schedule:
     - cron: '30 3 * * *'  # Runs daily at 9:00 AM IST
+on:
+  workflow_dispatch:
 
 jobs:
   build:
