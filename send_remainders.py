@@ -52,8 +52,8 @@ for name, bday in birthdays.items():
             body=f"⏰ Reminder: {name}'s birthday is tomorrow! 🎉 Don't forget to prepare your wishes or a surprise! 🎁",
             from_=twilio_whatsapp,
             to=user2)
-    else:
-        print(f"No birthday or anniversary today or tomorrow!")
+    
+print(f"No birthday or anniversary today or tomorrow!")
 
 for name, anni_date in anniversaries.items():
     if today_str == anni_date:
@@ -83,6 +83,6 @@ for name, anni_date in anniversaries.items():
             to=user2
         )
         print(f"Reminder message sent for {name}'s Anniversary!")
-    else:
-        print(f"No birthday or anniversary today or tomorrow!")
+
+print(f"No birthday or anniversary today or tomorrow!")
 
