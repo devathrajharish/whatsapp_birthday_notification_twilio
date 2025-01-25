@@ -1,88 +1,33 @@
-from twilio.rest import Client
-from datetime import datetime, timedelta
-import os
-import json
+name: Run Birthday Reminder
 
-# Twilio Credentials (Replace with your actual credentials)
-account_sid = os.getenv("TWILIO_ACCOUNT_SID") # Get this from Twilio Dashboard
-auth_token = os.getenv("TWILIO_AUTH_TOKEN")   # Get this from Twilio Dashboard
-user1 = os.getenv("HARISH_NUMBER")   # your whatsapp number
-user2 = os.getenv("SACHIN_NUMBER")   # Your whatsapp Number
-client = Client(account_sid, auth_token)
-twilio_whatsapp = os.getenv("TWILIO_PHONE_NUMBER")   # Twilio Sandbox Number
-# Birthday List
+on:
+  schedule:
+    - cron: '30 3 * * *'  # Runs daily at 9:00 AM IST
 
-birthdays_json = os.getenv("BIRTHDAYS")
-anniversaries_json = os.getenv("ANNIVERSARIES")
-anniversaries = json.loads(anniversaries_json)
-birthdays = json.loads(birthdays_json)
-#print(birthdays)
-# Your WhatsApp number and Twilio sandbox number
-      # E.g., whatsapp:+1234567890
-  # Twilio Sandbox Number
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-# Get today's date
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
 
-today = datetime.now()
-today_str = today.strftime("%m-%d")
-tomorrow_str = (today + timedelta(days=1)).strftime("%m-%d")
-
-# # Check for birthdays and send reminder
-for name, bday in birthdays.items():
-    # reminder = datetime.strptime(bday, "%m-%d")
-    if today_str == bday:
-        message = client.messages.create(
-            body=f"🎉 Reminder: It's {name}'s birthday today! Don't forget to wish them! 🎂",
-            from_=twilio_whatsapp,
-            to=user2
-        )
-        message = client.messages.create(
-        body=f"🎉 Reminder: It's {name}'s birthday today! Don't forget to wish them! 🎂",
-        from_=twilio_whatsapp,
-        to=user1
-        )
-        print(f"Reminder sent for {name}'s birthday!")
-    elif tomorrow_str == bday:
-        # Send Reminder for Upcoming Birthday
-        message = client.messages.create(
-            body=f"⏰ Reminder: {name}'s birthday is tomorrow! 🎉 Don't forget to prepare your wishes or a surprise! 🎁",
-            from_=twilio_whatsapp,
-            to=user1)
-        message = client.messages.create(
-            body=f"⏰ Reminder: {name}'s birthday is tomorrow! 🎉 Don't forget to prepare your wishes or a surprise! 🎁",
-            from_=twilio_whatsapp,
-            to=user2)
-    
-print(f"No birthday or anniversary today or tomorrow!")
-
-for name, anni_date in anniversaries.items():
-    if today_str == anni_date:
-        message = client.messages.create(
-            body=f"🎉 Reminder: It's {name}'s anniversary today! Don't forget to wish them! 🎂",
-            from_=twilio_whatsapp,
-            to=user1
-        )
-        message = client.messages.create(
-            body=f"🎉 Reminder: It's {name}'s anniversary today! Don't forget to wish them! 🎂",
-            from_=twilio_whatsapp,
-            to=user2
-        )
-        print(f"Reminder sent for {name}'s Anniversary!")
-
-    elif tomorrow_str == anni_date:
-        # Send Reminder for Upcoming Anniversary
-        message = client.messages.create(
-            body=f"⏰ Reminder: {name}'s Anniversary is tomorrow! 🎉 Don't forget to prepare your wishes or a surprise! 🎁",
-            from_=twilio_whatsapp,
-            to=user1
-        )
-        print(f"Reminder message sent for {name}'s Anniversary!")
-        message = client.messages.create(
-            body=f"⏰ Reminder: {name}'s Anniversary is tomorrow! 🎉 Don't forget to prepare your wishes or a surprise! 🎁",
-            from_=twilio_whatsapp,
-            to=user2
-        )
-        print(f"Reminder message sent for {name}'s Anniversary!")
-
-print(f"No birthday or anniversary today or tomorrow!")
-
+      - name: Install dependencies
+        run: |
+          pip install twilio
+      
+      - name: Run Script
+        env: 
+          TWILIO_ACCOUNT_SID: ${{ secrets.ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
+          HARISH_NUMBER: ${{ secrets.HARISH_NUMBER }}
+          SACHIN_NUMBER: ${{ secrets.SACHIN_NUMBER }}
+          BIRTHDAYS: ${{ secrets.BIRTHDAYS }}
+          ANNIVERSARIES: ${{ secrets.ANNIVERSARIES }}
+        run: |
+          python send_remainders.py
