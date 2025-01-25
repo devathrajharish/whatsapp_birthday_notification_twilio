@@ -28,6 +28,9 @@ today = datetime.now()
 today_str = today.strftime("%m-%d")
 tomorrow_str = (today + timedelta(days=1)).strftime("%m-%d")
 
+print(today_str)
+print(tomorrow_str)
+
 # # Check for birthdays and send reminder
 for name, bday in birthdays.items():
     # reminder = datetime.strptime(bday, "%m-%d")
